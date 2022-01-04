@@ -31,7 +31,7 @@ fun LoginScreen(navController: NavHostController, viewModel: LoginViewModel) {
     val username by viewModel.username.observeAsState("")
     val password by viewModel.password.observeAsState("")
 
-    val context = LocalContext.current
+    val context = MainApplication.applicationContext()
     val focusManager = LocalFocusManager.current
 
     //    When api response comes back successful send to dashboard
@@ -43,13 +43,11 @@ fun LoginScreen(navController: NavHostController, viewModel: LoginViewModel) {
 
     // Let user know if error occurs with login
     viewModel.apiError.observe(LocalLifecycleOwner.current) {
-        if(!it.isNullOrEmpty()) {
-            Toast.makeText(
-                context,
-                it,
-                Toast.LENGTH_SHORT
-            ).show()
-        }
+        Toast.makeText(
+            context,
+            "Error with login",
+            Toast.LENGTH_SHORT
+        ).show()
     }
 
     Column(
@@ -74,7 +72,7 @@ fun LoginScreen(navController: NavHostController, viewModel: LoginViewModel) {
         ) {
             OutlinedTextField(
                 value = username,
-                placeholder = { Text(text = "username") },
+                placeholder = { Text(text = "username", color = Color.Black) },
                 onValueChange = { viewModel.setUsername(it) },
                 keyboardOptions = KeyboardOptions(imeAction = ImeAction.Done),
                 keyboardActions = KeyboardActions(onDone = { focusManager.clearFocus() }),
@@ -94,7 +92,7 @@ fun LoginScreen(navController: NavHostController, viewModel: LoginViewModel) {
         ) {
             OutlinedTextField(
                 value = password,
-                placeholder = { Text(text = "password") },
+                placeholder = { Text(text = "password", color = Color.Black) },
                 onValueChange = { viewModel.setPassword(it) },
                 visualTransformation = PasswordVisualTransformation(),
                 keyboardOptions = KeyboardOptions(imeAction = ImeAction.Done),

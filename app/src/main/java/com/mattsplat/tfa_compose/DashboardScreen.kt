@@ -29,7 +29,7 @@ import com.mattsplat.tfa_compose.ViewModels.DashboardViewModel
 
 @Composable
 fun DashboardScreen(navController: NavHostController, viewModel: DashboardViewModel) {
-    val context = LocalContext.current
+    val context = MainApplication.applicationContext()
     val accountList = remember { mutableStateListOf<Account>() }
 
     val listener = object:  RequestListener {
@@ -56,7 +56,7 @@ fun DashboardScreen(navController: NavHostController, viewModel: DashboardViewMo
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier
             .fillMaxSize()
-            .background(Color.Cyan)
+            .background(MaterialTheme.colors.primary)
             .padding(top = 100.dp)
     ) {
         Text(
