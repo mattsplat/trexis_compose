@@ -15,7 +15,7 @@ class DashboardViewModel: ViewModel() {
     private val _apiError = MutableLiveData<String?>(null)
     val apiError: MutableLiveData<String?> get() = _apiError
 
-    fun requestAccounts(account_id: String) {
+    fun requestAccounts() {
         val listener = object: RequestListener {
             override fun onError(error: String?) {
                 _apiError.postValue(error)
